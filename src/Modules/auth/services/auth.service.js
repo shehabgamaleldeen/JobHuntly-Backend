@@ -1,7 +1,8 @@
 import UserModel from "../../../DB/Models/UserModel.js";  
-import ApiError  from "../../../Utils/ApiError.utils.js";
+import ApiError from "../../../Utils/ApiError.utils.js";
 import { generateAccessToken  ,  generateRefreshToken,  verifyRefreshToken, } from "./../../../Utils/tokens.utils.js";
 import { sendWelcomeEmail } from "./../../../Utils/email.utils.js"
+import { asyncHandler } from "../../../Utils/asyncHandler.utils.js";
 
 
 
@@ -47,7 +48,7 @@ export const register = async (userData) => {
 
 
 
-export const login = async (email, password) => {
+export const login =  async (email, password) => {
   const user = await UserModel.findOne({ email }).select("+password +refreshToken");
 
   if (!user) throw new ApiError(401, "Invalid email or password");
@@ -71,7 +72,7 @@ export const login = async (email, password) => {
     accessToken,
     refreshToken,
   };
-};
+}
 
 
 
@@ -79,7 +80,7 @@ export const login = async (email, password) => {
 
 
 
-export const refreshAccessToken = async (refreshToken) => {
+export const refreshAccessToken =  async (refreshToken) => {
   if (!refreshToken) throw new ApiError(401, "Refresh token is required");
 
   try {
@@ -97,4 +98,4 @@ export const refreshAccessToken = async (refreshToken) => {
   } catch (error) {
     throw new ApiError(401, "Invalid or expired refresh token");
   }
-};
+}

@@ -1,4 +1,3 @@
-
 import ApiError from "../Utils/ApiError.utils.js";
 
 const errorHandlerMiddleware = (err, req, res, next) => {
