@@ -32,3 +32,25 @@ catch(error){
 }
 }
 
+export const getMyCompanyJobs = async (req, res, next) => {
+  try {
+   // const companyId = req.login_user.companyId; // will be returned after fixing the authorization
+    const { companyId } = req.params; 
+
+    if (!companyId) {
+      return res.status(403).json({
+        message: "This user is not associated with a company",
+      });
+    }
+
+    const jobs = await getJobsByCompanyIdService(companyId);
+
+    res.status(200).json({
+      success: true,
+      data: jobs,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+

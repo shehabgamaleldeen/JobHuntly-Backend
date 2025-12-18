@@ -9,5 +9,8 @@ router.get("/:companyId", getCompanyById);
 
 router.post("/", createCompany);
 
+//router.get("/:companyId/jobs", AuthenticationMiddleware(), getMyCompanyJobs);
+router.get("/:companyId/jobs", getMyCompanyJobs);
+
 
 export default router;
