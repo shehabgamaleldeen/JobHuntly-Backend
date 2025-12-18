@@ -1,6 +1,6 @@
 // models/Job.js
 import mongoose from "mongoose";
-import { JOB_STATUS, QUESTION_TYPE, jobCategoryValues, jobEmploymentTypeValues, JOB_BENEFITS } from "../../Constants/constants.js";
+import { QUESTION_TYPE, jobCategoryValues, jobEmploymentTypeValues, JOB_BENEFITS, jobBenefits } from "../../Constants/constants.js";
 
 const JobSchema = new mongoose.Schema(
   {
@@ -81,7 +81,14 @@ const JobSchema = new mongoose.Schema(
     ],
 
     benefits: {
-      type: [JOB_BENEFITS],
+      type: [
+        {
+          id: Number,
+          icon: String,
+          title: String,
+          description: String
+        }
+      ],
       default: []
     }
   },
