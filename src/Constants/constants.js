@@ -82,6 +82,7 @@ export const JOB_BENEFITS = {
       "We anonymously match any donation our employees make (up to $/€ 600) so they can support the organizations they care about most—times two.",
   }
 }
+export const jobBenefits = Object.values(JOB_BENEFITS);
 
 // JOB QUESTION TYPES
 export const QUESTION_TYPE = {
