@@ -13,6 +13,8 @@ const routerHandler = async (app , express  ) => {
     app.use( "/auth" ,  AuthRouter )
     app.use( "/settings" ,  SettingsRouter )
     
+    app.use('/jobs', JobRouter)
+    app.use('/company/jobs/:jobId', JobApplicationRouter)
     
     
     
