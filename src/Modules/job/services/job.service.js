@@ -3,7 +3,7 @@ import JobApplicationModel from '../../../DB/Models/JobApplicationModel.js'
 import ApiError from '../../../Utils/ApiError.utils.js'
 
 export const getAllJobsService = async () => {
-  const jobs = await JobModel.find()
+  const jobs = await JobModel.find().populate('companyId')
   if (!jobs) {
     throw new ApiError(404, 'no jobs found')
   }
@@ -11,7 +11,7 @@ export const getAllJobsService = async () => {
 }
 
 export const getJobService = async (id) => {
-  const jobs = await JobModel.findById(id)
+  const jobs = await JobModel.findById(id).populate('companyId')
   if (!jobs) {
     throw new ApiError(404, 'job notfound')
   }
