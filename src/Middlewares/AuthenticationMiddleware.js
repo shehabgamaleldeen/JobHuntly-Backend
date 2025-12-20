@@ -1,7 +1,7 @@
 import  jwt  from 'jsonwebtoken';
 import UserModel from '../DB/Models/UserModel.js';
 // import { BlacklistToken_Model } from './../DB/models/BlackList_token_model.js';
-//import User_model from '../DB/Models/User_model.js';
+import UserModel from '../DB/Models/UserModel.js';
 
 
 
@@ -61,7 +61,7 @@ export const AuthenticationMiddleware = () => {
 
 
 
-//                ===================   still under test for black list  ========================
+//             ===================   still under test for black list  ========================
 export const AuthorizationMiddleware = (allow_role) =>{
     return async ( req , res , next ) =>{
  
@@ -76,8 +76,7 @@ export const AuthorizationMiddleware = (allow_role) =>{
             if ( if_black_list) {return res.status(401).json({ message :"this token is expired please login again"  }) }
 
             // find the data
-            const User = await User_model.findByPk(decoding_access_token.id  )
-          
+            const User = await UserModel.findByPk(decoding_access_token.id  )
             if (!User) { return res.status(404).json({ message :"this user is not found" }) }
             
             // console.log( User  , "ddddddddddddd" );
