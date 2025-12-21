@@ -4,6 +4,7 @@
 export const SYSTEM_ROLE = {
   JOB_SEEKER: 'JOB_SEEKER',
   ADMIN: 'ADMIN',
+  COMPANY: 'COMPANY',
 }
 
 // JOB EMPLOYMENT TYPES
@@ -141,221 +142,52 @@ export const LANGUAGE_LEVELS = {
 };
 
 export const COMPANY_INDUSTRIES = {
-  TECHNOLOGY: {
-    name: "Technology",
-    icon: "/public/images/industries/technology.png",
-  },
-  FINANCE: {
-    name: "Finance",
-    icon: "/public/images/industries/finance.png",
-  },
-  HEALTHCARE: {
-    name: "Healthcare",
-    icon: "/public/images/industries/healthcare.png",
-  },
-  EDUCATION: {
-    name: "Education",
-    icon: "/public/images/industries/education.png",
-  },
-  MARKETING: {
-    name: "Marketing",
-    icon: "/public/images/industries/marketing.png",
-  },
-  NON_PROFIT: {
-    name: "Social & Non-Profit",
-    icon: "/public/images/industries/nonprofit.png",
-  },
-};
+  TECHNOLOGY: "Technology",
+ 
+  FINANCE: "Finance",
+  HEALTHCARE: "Healthcare",
 
+  EDUCATION:  "Education",
 
+  MARKETING: "Marketing" ,
+  NON_PROFIT: "Social & Non-Profit"
+}
 
 export const TECH_STACK = {
   /* ===== FRONTEND ===== */
-  HTML: {
-    name: "HTML5",
-    logo: "/public/images/tech/html.png",
-    category: "Frontend",
-  },
-  CSS: {
-    name: "CSS3",
-    logo: "/public/images/tech/css.png",
-    category: "Frontend",
-  },
-  JAVASCRIPT: {
-    name: "JavaScript",
-    logo: "/public/images/tech/javascript.png",
-    category: "Frontend",
-  },
-  TYPESCRIPT: {
-    name: "TypeScript",
-    logo: "/public/images/tech/typescript.png",
-    category: "Frontend",
-  },
-  REACT: {
-    name: "React",
-    logo: "/public/images/tech/react.png",
-    category: "Frontend",
-  },
-  NEXTJS: {
-    name: "Next.js",
-    logo: "/public/images/tech/nextjs.png",
-    category: "Frontend",
-  },
-  VUE: {
-    name: "Vue.js",
-    logo: "/public/images/tech/vue.png",
-    category: "Frontend",
-  },
+  HTML: "/public/images/tech/html.png",
+  CSS: "/public/images/tech/css.png",
+  JAVASCRIPT: "/public/images/tech/javascript.png",
+  TYPESCRIPT: "/public/images/tech/typescript.png",
+  REACT: "/public/images/tech/react.png",
+  NEXTJS: "/public/images/tech/nextjs.png",
+  VUE: "/public/images/tech/vue.png",
 
   /* ===== BACKEND ===== */
-  NODEJS: {
-    name: "Node.js",
-    logo: "/public/images/tech/node.png",
-    category: "Backend",
-  },
-  EXPRESS: {
-    name: "Express.js",
-    logo: "/public/images/tech/express.png",
-    category: "Backend",
-  },
-  NESTJS: {
-    name: "NestJS",
-    logo: "/public/images/tech/nestjs.png",
-    category: "Backend",
-  },
-  DJANGO: {
-    name: "Django",
-    logo: "/public/images/tech/django.png",
-    category: "Backend",
-  },
-  RUBY: {
-    name: "Ruby",
-    logo: "/public/images/tech/ruby.png",
-    category: "Backend",
-  },
+  NODEJS: "/public/images/tech/node.png",
+  EXPRESS: "/public/images/tech/express.png",
+  NESTJS: "/public/images/tech/nestjs.png",
+  DJANGO: "/public/images/tech/django.png",
+  RUBY: "/public/images/tech/ruby.png",
 
   /* ===== DATABASE ===== */
-  MONGODB: {
-    name: "MongoDB",
-    logo: "/public/images/tech/mongodb.png",
-    category: "Database",
-  },
-  POSTGRES: {
-    name: "PostgreSQL",
-    logo: "/public/images/tech/postgres.png",
-    category: "Database",
-  },
-  MYSQL: {
-    name: "MySQL",
-    logo: "/public/images/tech/mysql.png",
-    category: "Database",
-  },
-  REDIS: {
-    name: "Redis",
-    logo: "/public/images/tech/redis.png",
-    category: "Database",
-  },
+  MONGODB: "/public/images/tech/mongodb.png",
+  POSTGRES: "/public/images/tech/postgres.png",
+  MYSQL: "/public/images/tech/mysql.png",
+  REDIS: "/public/images/tech/redis.png",
 
   /* ===== DEVOPS / CLOUD ===== */
-  DOCKER: {
-    name: "Docker",
-    logo: "/public/images/tech/docker.png",
-    category: "DevOps",
-  },
-  KUBERNETES: {
-    name: "Kubernetes",
-    logo: "/public/images/tech/kubernetes.png",
-    category: "DevOps",
-  },
-  AWS: {
-    name: "AWS",
-    logo: "/public/images/tech/aws.png",
-    category: "Cloud",
-  },
-  GCP: {
-    name: "Google Cloud",
-    logo: "/public/images/tech/gcp.png",
-    category: "Cloud",
-  },
+  DOCKER: "/public/images/tech/docker.png",
+  KUBERNETES: "/public/images/tech/kubernetes.png",
+  AWS: "/public/images/tech/aws.png",
+  GCP: "/public/images/tech/gcp.png",
 
-  /* ===== ANALYTICS / TOOLS ===== */
-  MIXPANEL: {
-    name: "Mixpanel",
-    logo: "/public/images/tech/mixpanel.png",
-    category: "Analytics",
-  },
-  GOOGLE_ANALYTICS: {
-    name: "Google Analytics",
-    logo: "/public/images/tech/ga.png",
-    category: "Analytics",
-  },
-  FRAMER: {
-    name: "Framer",
-    logo: "/public/images/tech/framer.png",
-    category: "Design",
-  },
-  FIGMA: {
-    name: "Figma",
-    logo: "/public/images/tech/figma.png",
-    category: "Design",
-  },
+  /* ===== ANALYTICS / DESIGN ===== */
+  MIXPANEL: "/public/images/tech/mixpanel.png",
+  GOOGLE_ANALYTICS: "/public/images/tech/ga.png",
+  FRAMER: "/public/images/tech/framer.png",
+  FIGMA: "/public/images/tech/figma.png",
 };
-
-export const OFFICE_LOCATIONS = {
-  USA_NY: {
-    country: "United States",
-    city: "New York",
-    flag: "🇺🇸",
-    isHeadQuarter: true,
-  },
-  USA_SF: {
-    country: "United States",
-    city: "San Francisco",
-    flag: "🇺🇸",
-  },
-  UK_LONDON: {
-    country: "United Kingdom",
-    city: "London",
-    flag: "🇬🇧",
-  },
-  GERMANY_BERLIN: {
-    country: "Germany",
-    city: "Berlin",
-    flag: "🇩🇪",
-  },
-  JAPAN_TOKYO: {
-    country: "Japan",
-    city: "Tokyo",
-    flag: "🇯🇵",
-  },
-  CANADA_TORONTO: {
-    country: "Canada",
-    city: "Toronto",
-    flag: "🇨🇦",
-  },
-  AUSTRALIA_SYDNEY: {
-    country: "Australia",
-    city: "Sydney",
-    flag: "🇦🇺",
-  },
-  UAE_DUBAI: {
-    country: "UAE",
-    city: "Dubai",
-    flag: "🇦🇪",
-  },
-  EGYPT_CAIRO: {
-    country: "Egypt",
-    city: "Cairo",
-    flag: "🇪🇬",
-  },
-  REMOTE: {
-    country: "Remote",
-    city: "Worldwide",
-    flag: "🌍",
-    isRemote: true,
-  },
-};
-
 
 
 // for multer
