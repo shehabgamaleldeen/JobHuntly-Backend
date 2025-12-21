@@ -57,15 +57,9 @@ const CompanySchema = new mongoose.Schema(
     /* ================= TECH STACK ================= */
     techStack: [
       {
-        name: {
-          type: String,
-          enum: Object.values(TECH_STACK),
-        },
-        logo: {
-          type: String,
-          enum: Object.values(TECH_STACK),
-        },
-      },
+        name: { type: String, required: true },
+        logo:  { type: String , enum: Object.values(TECH_STACK),},
+    }
     ],
 
   },
