@@ -16,46 +16,42 @@ const CompanySchema = new mongoose.Schema(
     /* ================= BASIC INFO ================= */
     name: { type: String, required: true },
 
-    industry:  {Type : String , enum: Object.values(COMPANY_INDUSTRIES)},
+    industry: { type: String, enum: Object.values(COMPANY_INDUSTRIES) },
 
     website: String,
     foundedDate: Date,
     employeesRange: String,
     about: String,
     logoUrl: String,
-
+        
     hqCity: String,
     hqCountry: String,
-
+    
     isVerified: {
       type: Boolean,
       default: false,
     },
 
+    /* ================= IMAGES GALLERY ================= */
+    images: [
+        {
+            src: String,
+          },
+        ],
+        
     /* ================= OFFICE LOCATIONS ================= */
-    officeLocations: [
-      {
-        country: String,
-        isHeadQuarter: {
-          type: Boolean,
-          default: false,
-        },
-        isRemote: {
-          type: Boolean,
-          default: false,
-        },
-      },
-    ],
 
+    countries: [{ code: String, name: String }],
+        
     /* ================= CONTACT / SOCIAL LINKS ================= */
-    contacts: [
-      {
-        type: {
-          type: String,
-          enum: Object.values(COMPANY_LINK_TYPE),
-        },
-        value: String,
+    links: [
+    {
+      type: {
+        type: String,
+        enum: Object.values(COMPANY_LINK_TYPE),
       },
+      value: String,
+    },
     ],
 
     /* ================= TECH STACK ================= */
@@ -63,11 +59,15 @@ const CompanySchema = new mongoose.Schema(
       {
         name: {
           type: String,
-          enum: Object.values(TECH_STACK)
+          enum: Object.values(TECH_STACK),
         },
-
+        logo: {
+          type: String,
+          enum: Object.values(TECH_STACK),
+        },
       },
     ],
+
   },
   { timestamps: true }
 );
