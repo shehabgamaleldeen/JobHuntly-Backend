@@ -22,6 +22,7 @@ export const getJobService = async (id) => {
   return job
 }
 
+
 export const createJobApplicationService = async ({
   jobId,
   user,
@@ -33,17 +34,46 @@ export const createJobApplicationService = async ({
   }
   const seekerId = user._id
 
-  // Prevent duplicate application
+  // 1. Check if Job exists and fetch questions
+  const job = await JobModel.findById(jobId)
+  if (!job) {
+    throw new ApiError(404, 'Job not found')
+  }
+
+  // 2. Prevent duplicate application
   const exists = await JobApplicationModel.findOne({ jobId, seekerId })
   if (exists) {
-    throw new ApiError(404, 'You have already applied to this job')
+    throw new ApiError(409, 'You have already applied to this job')
+  }
+
+  // 3. Process and Validate Questions
+  const applicationResponses = []
+  
+  if (job.questions && job.questions.length > 0) {
+    for (const question of job.questions) {
+      // Find the user's answer for this specific question
+      const userAnswer = responses.find(
+        (r) => r.questionId === question._id.toString()
+      )
+
+      if (!userAnswer || !userAnswer.answerValue) {
+        throw new ApiError(400, `Missing answer for question: "${question.questionText}"`)
+      }
+
+      applicationResponses.push({
+        questionId: question._id,
+        questionText: question.questionText, // Snapshot from DB
+        type: question.type,               // Snapshot from DB
+        answerValue: userAnswer.answerValue
+      })
+    }
   }
 
   const application = await JobApplicationModel.create({
     jobId,
     seekerId,
 
-    //from authenticated user
+    // from authenticated user
     fullName: user.fullName,
     email: user.email,
     phone: user.phone,
@@ -51,9 +81,9 @@ export const createJobApplicationService = async ({
     linkedinUrl: user.linkedinUrl,
     portfolioUrl: user.portfolioUrl,
 
-    // taken from the user
+    // taken from the user request
     resumeUrl,
-    responses,
+    responses: applicationResponses, // Use the processed secure responses
   })
 
   return application
