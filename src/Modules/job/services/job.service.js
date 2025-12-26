@@ -4,7 +4,7 @@ import mongoose from 'mongoose'
 import ApiError from '../../../Utils/ApiError.utils.js'
 
 export const getAllJobsService = async () => {
-  const jobs = await JobModel.find().populate('companyId').populate('skillsIds')
+  const jobs = await JobModel.find().populate('companyId')
   if (!jobs) {
     throw new ApiError(404, 'no jobs found')
   }
