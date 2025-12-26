@@ -15,7 +15,8 @@ export const getAllJobs = asyncHandler(async (req, res) => {
 })
 
 export const getJobById = asyncHandler(async (req, res) => {
-  const job = await getJobService(req.params.id)
+  const seekerId = req.login_user?._id || null
+  const job = await getJobService(req.params.id, seekerId)
 
   res.status(200).json({
     data: job,

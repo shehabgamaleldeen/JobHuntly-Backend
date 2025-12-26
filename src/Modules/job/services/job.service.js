@@ -11,15 +11,29 @@ export const getAllJobsService = async () => {
   return jobs
 }
 
-export const getJobService = async (id) => {
-  if (!mongoose.Types.ObjectId.isValid(id)) {
+export const getJobService = async (jobId, seekerId = null) => {
+  if (!mongoose.Types.ObjectId.isValid(jobId)) {
     throw new ApiError(400, 'Invalid Job ID format')
   }
-  const job = await JobModel.findById(id).populate('companyId')
+  const job = await JobModel.findById(jobId).populate('companyId')
+
   if (!job) {
     throw new ApiError(404, 'job notfound')
   }
-  return job
+
+  let hasApplied = false
+
+  if (seekerId) {
+    hasApplied = await JobApplicationModel.exists({
+      jobId: new mongoose.Types.ObjectId(jobId),
+      seekerId: new mongoose.Types.ObjectId(seekerId),
+    })
+  }
+
+  return {
+    ...job.toObject(),
+    hasApplied: Boolean(hasApplied),
+  }
 }
 
 export const createJobApplicationService = async ({
