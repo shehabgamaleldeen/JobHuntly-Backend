@@ -53,7 +53,7 @@ const createJobSchema = Joi.object({
         'any.required': 'Salary currency is required.'
     }),
 
-    postDate: Joi.date().required().messages({
+    postDate: Joi.date().messages({
         'date.base': 'Post date must be a valid date format.',
         'any.required': 'Post Date is required.'
     }),
