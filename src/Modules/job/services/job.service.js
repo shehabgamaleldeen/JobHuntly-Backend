@@ -16,7 +16,9 @@ export const getJobService = async (jobId, seekerId = null) => {
   if (!mongoose.Types.ObjectId.isValid(jobId)) {
     throw new ApiError(400, 'Invalid Job ID format')
   }
-  const job = await JobModel.findById(jobId).populate('companyId')
+  const job = await JobModel.findById(jobId)
+    .populate('companyId')
+    .populate('skillsIds')
 
   if (!job) {
     throw new ApiError(404, 'job notfound')
