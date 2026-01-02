@@ -4,6 +4,8 @@ import { sendWelcomeEmail } from "./../../../Utils/email.utils.js"
 import bcrypt ,{ compareSync, hashSync } from "bcrypt";
 import JobSeekerModel from "../../../DB/Models/JobSeekerModel.js";
 import SkillModel from "../../../DB/Models/SkillsModel.js";
+import CompanyModel from "../../../DB/Models/CompanyModel.js";
+import { SYSTEM_ROLE } from "../../../Constants/constants.js";
 
 
 
@@ -171,14 +173,15 @@ export const changeEmail = async (userId, { newEmail, password }) => {
 
   if (!user) throw new ApiError(404, "User not found")
 
-  const isMatch = bcrypt.compareSync(password, user.password)
-  if (!isMatch) throw new ApiError(401, "Invalid password")
-
   const emailExists = await UserModel.findOne({ email: newEmail })
   if (emailExists) throw new ApiError(400, "Email already in use")
 
   user.email = newEmail
   await user.save()
+
+  /* ================= EMAIL ================= */
+   await sendWelcomeEmail(user.fullName, user.email);
+  
 
   return {
     email: user.email,
