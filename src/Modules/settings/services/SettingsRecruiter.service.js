@@ -136,6 +136,33 @@ export const getCompanyProfile = async (userId) => {
 /* 
 
 ==================================================== recruiter =============================
+
+    // Fetch skills
+    useEffect(() => {
+        const fetchSkills = async () => {
+            const skillsResponse = await getSkills();
+
+            const skillsArray = skillsResponse.data.data || skillsResponse.data;
+
+            const formattedSkills = skillsArray.map((skill: { _id: string; name: string }) => ({
+                value: skill._id,  // MongoDB ID
+                label: skill.name  // Skill Name
+            }));
+
+            setSkillsOptions(formattedSkills);
+
+        };
+        toast.promise(fetchSkills(), {
+            error: (err) => {
+                const errorMessage = err.response?.data?.error || "Failed to fetch skills";
+                return `${errorMessage}`;
+            }
+        }
+        );
+    }, []);
+
+
+
 🏢 COMPANY (عام)
 PUT    http://localhost:3000/companies/me
 POST    http://localhost:3000/companies/me
