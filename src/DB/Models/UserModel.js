@@ -12,7 +12,6 @@ const UserSchema = new mongoose.Schema(
     isActive: { type: Boolean, default: true },
     lastLoginAt: Date,
     refreshToken: { type: String, select: false},
-    BackGroundUrl: String,
     // used for forgot-password flow
     resetToken: { type: String },
     resetTokenExpiry: { type: Date },
