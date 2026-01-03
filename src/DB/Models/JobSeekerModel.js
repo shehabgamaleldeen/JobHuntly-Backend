@@ -19,6 +19,7 @@ const JobSeekerSchema = new mongoose.Schema(
     experienceYears: Number,
     highestQualification: String,
     logoUrl: String,
+    backGroundUrl: String,
 
     openForOpportunities: {
       type: Boolean,
