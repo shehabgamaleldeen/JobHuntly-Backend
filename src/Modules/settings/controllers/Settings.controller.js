@@ -58,6 +58,43 @@ export const getCompanyProfile = asyncHandler(async (req, res) => {
 
 //   ========================= for all
 
+
+/* ================= LOGO ================= */
+export const uploadLogo = asyncHandler(async (req, res) => {
+  const result = await SettingsApplicantService.uploadImage({
+    file: req.file,
+    req ,
+    role :req.login_user.role,
+    folder: "logo",
+    userId : req.login_user._id
+  })
+
+  
+
+  res.status(200).json({
+    success: true,
+    ...result,
+  })
+})
+
+/* ================= BACKGROUND ================= */
+export const uploadBackground = asyncHandler(async (req, res) => {
+  const result = await SettingsApplicantService.uploadImage({
+    file: req.file,
+    req,
+    role :req.login_user.role,
+    folder: "background",
+    userId : req.login_user._id
+  })
+
+  res.status(200).json({
+    success: true,
+    ...result,
+  })
+})
+
+
+
 export const changeEmail = asyncHandler(async (req, res) => {
   const userId = req.login_user._id
   const result = await SettingsApplicantService.changeEmail(userId, req.body)
@@ -94,6 +131,8 @@ export const deleteAccount = asyncHandler(async (req, res) => {
     data: result,
   })
 })
+
+
 
 
 

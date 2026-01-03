@@ -19,6 +19,7 @@ const CompanySchema = new mongoose.Schema(
     employeesRange: String,
     about: String,
     logoUrl: String,
+    backGroundUrl: String,
         
     hqCity: String,
     hqCountry: String,
