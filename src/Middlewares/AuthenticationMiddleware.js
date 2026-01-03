@@ -5,6 +5,8 @@ export const AuthenticationMiddleware = () => {
   return async (req, res, next) => {
     try {
       const authHeader = req.headers.authorization;
+      console.log( authHeader);
+      
 
       if (!authHeader) {
         return res.status(401).json({ message: "please login first" });
