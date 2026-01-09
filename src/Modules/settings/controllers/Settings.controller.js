@@ -20,7 +20,15 @@ export const getProfile = asyncHandler(async (req, res) => {
   res.status(201).json({ success: true, data: result });
 });
 
+export const getSkills = asyncHandler(async (req, res) => {
+  const userId = req.login_user._id
 
+  const result = await SettingsApplicantService.getSkills(userId)
+  res.status(200).json({
+    success: true,
+    data: result,
+  })
+})
 
 
 
