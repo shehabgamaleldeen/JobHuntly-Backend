@@ -5,6 +5,7 @@ import bcrypt ,{ compareSync, hashSync } from "bcrypt";
 import JobSeekerModel from "../../../DB/Models/JobSeekerModel.js";
 import CompanyModel from "../../../DB/Models/CompanyModel.js";
 import { SYSTEM_ROLE } from "../../../Constants/constants.js";
+import SkillModel from "../../../DB/Models/SkillsModel.js";
 
 
 export const updateProfile = async ( userId,data) => {
@@ -38,36 +39,17 @@ export const updateProfile = async ( userId,data) => {
   });
 
 
+
   /* ================= SKILLS ================= */
-  if (Array.isArray(data.skills)) {
-    const skillIds = [];
+if (
+  Array.isArray(data.skills) &&
+  JSON.stringify(data.skills.map(String)) !==
+    JSON.stringify(jobSeeker.skills.map(String))
+) {
+  jobSeeker.skills = data.skills
+}
 
-    // for (const skill of data.skills) {
-    //   const skillName = skill.name.trim().toLowerCase();
 
-    //   //  check if skill already exists
-    //   let existingSkill = await SkillModel.findOne({ name: skillName });
-
-    //   if (!existingSkill) {
-    //     //  create new skill
-    //     existingSkill = await SkillModel.create({
-    //       name: skillName,
-    //       level: skill.level,
-    //       seekerId: userId,
-    //     });
-    //   }
-
-    //   skillIds.push(existingSkill._id);
-    // }
-
-    //  prevent unnecessary update
-    if (
-      JSON.stringify(skillIds.map(String)) !==
-      JSON.stringify(jobSeeker.skills.map(String))
-    ) {
-      jobSeeker.skills = skillIds;
-    }
-  }
   /* ================= LANGUAGES ================= */
   if (
     Array.isArray(data.languages) &&
@@ -154,7 +136,7 @@ export const getProfile = async (userId) => {
       portfolioUrl: jobSeeker.portfolioUrl,
 
       logoUrl: jobSeeker.logoUrl,
-      backgroundUrl: jobSeeker.backgroundUrl,
+      backgroundUrl: jobSeeker.backGroundUrl,
 
       createdAt: jobSeeker.createdAt,
       updatedAt: jobSeeker.updatedAt,
@@ -163,11 +145,33 @@ export const getProfile = async (userId) => {
 };
 
 
+export const getSkills = async (userId) => {
+
+  const user = await UserModel.findById(userId)
+
+  if (!user) {
+    throw new ApiError(404, "User not found");
+  }
+
+//============================== the skills
+  const skills = await SkillModel.find({})
+    .select("name") 
+    .lean()
+    
+
+  if (!skills || skills.length === 0) {
+    throw new ApiError(404, "No skills found")
+  }
+
+  return skills
+}
 
 
 
 
 // ===================================== for all 
+
+
 
 
 export const uploadImage = async ({
