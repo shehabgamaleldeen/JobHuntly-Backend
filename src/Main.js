@@ -5,6 +5,8 @@ import dotenv from 'dotenv'
 import cors from 'cors'
 import rateLimit from 'express-rate-limit'
 import helmet from 'helmet'
+import http from "http"
+import { Server } from "socket.io"
 
 dotenv.config()
 
@@ -28,10 +30,10 @@ const bootstrap = () => {
     })
   )
 
-  // app.use(
-  //   helmet({ xContentTypeOptions: false, crossOriginOpenerPolicy: true }) 
-  // );
-  // app.use(general_rate_limit);
+  app.use(
+    helmet({ xContentTypeOptions: false, crossOriginOpenerPolicy: true }) 
+  );
+  app.use(general_rate_limit);
 
   // Stripe webhook needs raw body BEFORE express.json() parses it
   // This must come before app.use(express.json())
@@ -105,17 +107,10 @@ const bootstrap = () => {
   // 7. Use httpServer.listen INSTEAD of app.listen
   const port = process.env.PORT || 3000;
   httpServer.listen(port, () => {
-    console.log(`Server & Socket listening on port ${port}`);
-    //console.log(`Listening on =========> ${JSON.stringify(server.address())}`)
+    console.log(`Listening on =========> ${JSON.stringify(httpServer.address())}`)
   });
 
 
-  // const server = app.listen(process.env.PORT || 3000, (error) => {
-  //   if (error) {
-  //     throw error // e.g. EADDRINUSE
-  //   }
-  //   console.log(`Listening on =========> ${JSON.stringify(server.address())}`)
-  // })
 }
 
 export default bootstrap
