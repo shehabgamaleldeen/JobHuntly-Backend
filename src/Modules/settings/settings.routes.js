@@ -21,6 +21,8 @@ SettingsRouter.put("/updateProfile", SettingsController.updateProfile);
 
 SettingsRouter.get("/getProfile",SettingsController.getProfile);
 
+SettingsRouter.get("/getSkills",SettingsController.getSkills);
+
 
 
 
