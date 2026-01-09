@@ -20,7 +20,7 @@ export const getJobApplicationService = async (applicationId, req) => {
     throw new ApiError(404, 'Job Application Not Found')
   }
 
-  if (!jobApplication.isReviewed) {
+  if (jobApplication.isReviewed) {
     jobApplication.isReviewed = true
     jobApplication.timeOfReview = Date.now()
 
